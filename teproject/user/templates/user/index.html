@@ -3,6 +3,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+
+  .frm{
+    width: 640px;
+    height: 5500px;
+    overflow: auto;
+    align-items: center;
+    margin: auto;
+    display: block;
+    border: none;
+    overflow: hidden;
+  }
+  .container{
+    align-items: center;
+    background-color: blanchedalmond;
+    padding-bottom: 4rem;
+  }
+  
+  .btn {
+  background-color:black;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.3s;
+  }
+  .btn:hover {
+    opacity: 0.6;
+    color: white;
+  }
+
+</style>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +99,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">project</a>
+          <a class="navbar-brand" class="styleheader" href="{% url "index" %}">Career Recomennder</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavBar">
           <ul class="nav navbar-nav navbar-right">
@@ -84,15 +120,59 @@
   <br/>
   <br>
   <br>
-  <div class="row">
+  <div class="container">
     {% block start %}
     {% if user.is_authenticated %}
-    <center><h1>welcome, here</h1></center>
-    {% else %}
-    <center><h1>log in, plz . . .</h1></center>
-    {% endif %}
-    {% endblock %}
+    <center><h1>welcome, here</h1>  </center>
+
+    <form action="{% url 'result' %}">
+      {% csrf_token %}
+      How comfortable would you be in doing the administration of a company for ensuring that decisions of the board of directors are implemented?<br>
+      <input type="text" required name="a" pattern="[1-5]" /> <br><br>
+      Rate your interest level in performing flying and operations in an aircraft<br>
+      <input type="text" required name="b" pattern="[1-5]" /> <br><br>
+      Rate your interest in designing website/applications/security solutions/database management/etc<br>
+      <input type="text" required name="c" pattern="[1-5]" /> <br><br>
+      How much would you rate yourself in being able to design a plan for interiors including color combinations, furniture, lighting, flooring and electrical layouts?<br>
+      <input type="text" required name="d" pattern="[1-5]" /> <br><br>
+      How much do you think you would enjoy designing and assembling spare parts in an automobile.<br>
+      <input type="text" required name="e" pattern="[1-5]" /> <br><br>
+      How much would you enjoy learning about machines, power trains, efficient power solutions, etc.<br>
+      <input type="text" required name="f" pattern="[1-5]" /> <br><br>
+      How much would you like to dispense prescription medications to patients and offer expertise in the safe use of prescription.<br>
+      <input type="text" required name="g" pattern="[1-5]" /> <br><br>
+      How much would you be interested in  providing financial assistance to the client as per their requirement and needs.<br>
+      <input type="text" required name="h" pattern="[1-5]" /> <br><br>
+      How much would you be interested in writing and recording articles for television, radio, advertising, movies, the Internet, newspapers, magazines, and so forth.<br>
+      <input type="text" required name="i" pattern="[1-5]" /> <br><br>
+      Rate your interest level concerned with development, design, build, supervision, operations on infrastructure projects like roads, dams, tunnels, airports<br>
+      <input type="text" required name="j" pattern="[1-5]" /> <br><br>
+      How much interested are you in conducting some scientific research  <br>
+      <input type="text" required name="k" pattern="[1-5]" /> <br><br>
+      Rate your interests in teaching profession<br>
+      <input type="text" required name="l" pattern="[1-5]" /> <br><br>
+      Rate your ability to be able to develop and execute strategies to promote brands, products and services, maximizing profits for the company.<br>
+      <input type="text" required name="m" pattern="[1-5]" /> <br><br>
+      Rate your interest in supporting the government in delivering policies and public services.<br>
+      <input type="text" required name="n" pattern="[1-5]" /> <br><br>
+      How comfortable are you in dealing with legal matters and understanding laws for individuals and firms?<br>
+      <input type="text" required name="o" pattern="[1-5]" /> <br><br>
+      What is your understanding level about financial records management or offering the best solutions for profit maximization?<br>
+      <input type="text" required name="p" pattern="[1-5]" /> <br><br>
+      Rate your confidence level about the Study of human body structure or other species.<br>
+      <input type="text" required name="q" pattern="[1-5]" /> <br><br>
+      <center>
+        <button class="btn" type="submit"> Submit</button><br>
+      </center>
+    </form>
   </div>
+    {% else %}
+
+    <center><h1>Please login to continue</h1></center>
+    {% endif %}
+
+    {% endblock %}
+
 </body>
 
 </html>

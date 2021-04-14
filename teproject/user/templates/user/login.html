@@ -2,15 +2,33 @@
 {% load crispy_forms_tags %}
 {% block start %}
 
+<style>
+  .btn {
+  background-color:black;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 1;
+  transition: 0.3s;
+}
+  .btn:hover {
+    opacity: 0.6;
+    color: white; 
+  }
+</style>
+
  <div class="content-section col-md-8 col-md-offset-2">
   <center>
-  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+  <form method="POST" style="margin: 4%; padding:10%;">
     {% csrf_token %}
     <fieldset class="form-group">
       {{ form|crispy}}
     </fieldset>
    <center>
-    <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-log-in"></span> &nbsp; login</button>
+    <button class="btn" type="submit"><span class="glyphicon glyphicon-log-in"></span> &nbsp; login</button>
   </center>
   <br/>
   <sub style="text-align: left;"><a href="{% url 'register' %}" style="text-decoration: none; color: blue; padding:2%; cursor:pointer; margin-right:2%;">don't have account,sign up</a></sub>
