@@ -57,37 +57,114 @@ def Login(request):
     return render(request, 'user/login.html', {'form':form, 'title':'log in'})
 
 ################ import ml###################################################
+from xgboost import XGBClassifier
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
 
 def result(request):
     return render(request,"user/result.html")
 
-# def getPredictions(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q):
-#     import pickle
-#     model = joblib.load('xgboost.sav')
-#     scaled = joblib.load('encoder.sav')
-#     prediction = model.predict(le.transform([[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q]]))
-#     print(prediction)
+def getPredictions(arr):
+    #import pickle
+    model = joblib.load('extra.sav')
+    #scaled = joblib.load('encoder.sav')
+    prediction = model.predict(arr)
+    return prediction
 
-# def result(request):
-#     a = int(request.GET['a'])
-#     b = int(request.GET['b'])
-#     c = int(request.GET['c'])
-#     d = int(request.GET['d'])
-#     e = int(request.GET['e'])
-#     f = int(request.GET['f'])
-#     g = int(request.GET['g'])
-#     h = int(request.GET['h'])
-#     i = int(request.GET['i'])
-#     j = int(request.GET['j'])
-#     k = int(request.GET['k'])
-#     l = int(request.GET['l'])
-#     m = int(request.GET['m'])
-#     n = int(request.GET['n'])
-#     o = int(request.GET['o'])
-#     p = int(request.GET['p'])
-#     q = int(request.GET['q'])
+def result(request):
+    if request.method=='POST':
+        a = int(request.POST.get('a'))
+        b = int(request.POST.get('b'))
+        c = int(request.POST.get('c'))
+        d = int(request.POST.get('d'))
+        e = int(request.POST.get('e'))
+        f = int(request.POST.get('f'))
+        g = int(request.POST.get('g'))
+        h = int(request.POST.get('h'))
+        i = int(request.POST.get('i'))
+        j = int(request.POST.get('j'))
+        k = int(request.POST.get('k'))
+        l = int(request.POST.get('l'))
+        m = int(request.POST.get('m'))
+        n = int(request.POST.get('n'))
+        o = int(request.POST.get('o'))
+        p = int(request.POST.get('p'))
+        q = int(request.POST.get('q'))
 
+        arr = ([[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q]])
+        print(arr)
 
-#     result = getPredictions(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q)
+        ans = getPredictions(arr)        
+        
+        if ans[0]==0:
+            recommend="Automobile Engineering"
 
-#     return render(request, 'result.html', {'result':ans})
+        elif ans[0]==1:
+            recommend="Banking"
+
+        elif ans[0]==2:
+             recommend="Chartered Accountant"
+
+        elif ans[0]==3:
+            recommend="Civil Engineering"
+
+        elif ans[0]==4:
+            recommend="Civil Services"
+        
+        elif ans[0]==5:
+            recommend="Interior Designer"
+
+        elif ans[0]==6:
+            recommend="Lawyer"
+
+        elif ans[0]==7:
+            recommend="Management Studies"
+
+        elif ans[0]==8:            
+            recommend="Marketing Studies"
+
+        elif ans[0]==9:            
+            recommend="Mass Media"
+        
+        elif ans[0]==10:
+            recommend="Mechanical Engineering"
+            
+        
+        elif ans[0]==11:
+            recommend="Medical Science"
+            
+
+        elif ans[0]==12:
+            recommend="Pharmacist"
+        
+                 
+
+        elif ans[0]==13:
+            recommend="Pilot"
+            
+        
+        elif ans[0]==14:
+            recommend="Scientist"
+            
+
+        elif ans[0]==15:
+            recommend="Software Engineering"
+            
+        
+        elif ans[0]==16:
+            recommend="Teacher"
+
+        else: 
+            recommend="Error, please go back and answer questions again."
+            
+    
+
+        # if (ans[0]==7):
+        #     print (ans[0])
+        #     recommend="Management Studies"
+
+        return render(request, 'user/result.html', {'ans': recommend})
+
+    # else:
+    #     return render(request,'user/result.html' , {'ans': ans})
